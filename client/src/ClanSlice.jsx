@@ -13,7 +13,13 @@ const clanSlice = createSlice({
         status: 'idle',
         error: null,
     },
-    reducers: {},
+    reducers: {
+        resetClan: (state) => {
+            state.clan = null
+            state.status = 'idle'
+            state.error = null
+        }
+    },
     extraReducers: (builder) => {
         builder
         .addCase(fetchClan.pending, (state) => {
@@ -30,5 +36,7 @@ const clanSlice = createSlice({
         })
     },
     })
+
+export const { resetClan } = clanSlice.actions
 
 export default clanSlice.reducer

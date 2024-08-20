@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchClan } from "./ClanSlice"
+import { fetchClan, resetClan } from "./ClanSlice"
 import { useParams } from "react-router-dom"
 
 function ClanDetails() {
@@ -15,6 +15,12 @@ function ClanDetails() {
             dispatch(fetchClan(id))
         }
     }, [status, dispatch, id])
+
+    useEffect(() => {
+        return () => {
+          dispatch(resetClan())
+        }
+      }, [dispatch, id])
 
     let content
 
