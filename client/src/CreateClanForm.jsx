@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import * as Yup from "yup"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import { createClan } from "./ClanFormSlice"
+import './EventForm.css'
 
 function CreateClanForm() {
   const dispatch = useDispatch()
@@ -25,7 +26,7 @@ function CreateClanForm() {
   }
 
   return (
-    <div>
+    <div className="form-container">
       <h2>Welcome to the Create a Clan Form Page</h2>
       <p>This is the create a clan form page of the application.</p>
       <Formik
@@ -34,7 +35,7 @@ function CreateClanForm() {
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
-          <Form>
+          <Form className="form">
             <div>
               <label htmlFor="name">Clan Name</label>
               <Field type="text" name="name" />

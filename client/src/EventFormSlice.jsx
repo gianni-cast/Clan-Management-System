@@ -1,8 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from "axios"
+import { fetchClans } from "./ClanSlice"
 
-export const createEvent = createAsyncThunk("events/createEvent", async (formData) => {
+export const createEvent = createAsyncThunk("events/createEvent", async (formData, { dispatch }) => {
     const response = await axios.post('http://127.0.0.1:5555/events', formData)
+    dispatch(fetchClans())
     return response.data
 })
 

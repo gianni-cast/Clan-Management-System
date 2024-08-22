@@ -1,7 +1,8 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { fetchEvent } from "./EventSlice"
+import { fetchEvent, resetEvent, updateParticipationStatus } from "./EventSlice"
+import './Details.css'
 
 function EventDetails() {
     const { id } = useParams()
@@ -16,13 +17,23 @@ function EventDetails() {
         }
     }, [status, dispatch, id])
 
+    useEffect(() => {
+        return () => {
+            dispatch(resetEvent())
+        }
+    }, [dispatch, id])
+
+    const handleStatusChange = (participationId) => {
+        dispatch(updateParticipationStatus({ participationId, status: 'Confirmed' }))
+    }
+
     let content
 
     if (status === 'loading') {
         content = <p>Loading...</p>
     } else if (status === 'succeeded') {
         content = (
-            <div>
+            <div className="details-box">
                 <h3>{event?.event}</h3>
                 <p>{event?.details}</p>
                 <h4>Date: {event?.date}</h4>
@@ -32,6 +43,9 @@ function EventDetails() {
                     {event?.participations?.map((participation) => (
                         <li key={participation.id}>
                             Username: {participation.member.username} - Role: {participation.member.role} - Status: {participation.participation_status}
+                            {participation.participation_status === 'Pending' && (
+                                <button onClick={() => handleStatusChange(participation.id)}>Confirm</button>
+                            )}
                         </li>
                     ))}
                 </ul>
@@ -42,7 +56,7 @@ function EventDetails() {
     }
 
     return (
-        <div>
+        <div className="details-container">
             <h2>Welcome to the Event Details Page</h2>
             {content}
         </div>

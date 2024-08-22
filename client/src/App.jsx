@@ -9,7 +9,6 @@ import EventDetails from "./EventDetails"
 function App() {
   return (
     <div>
-      <h1>My App</h1>
       <Navbar />
       <Routes>
         <Route path="/" element={<Clans />} />

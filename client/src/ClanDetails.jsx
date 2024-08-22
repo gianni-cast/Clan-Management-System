@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchClan, resetClan } from "./ClanSlice"
-import { useParams } from "react-router-dom"
+import { fetchClan, resetClan, deleteClan } from "./ClanSlice"
+import { useParams, useNavigate } from "react-router-dom"
 
 function ClanDetails() {
     const { id } = useParams()
@@ -9,18 +9,23 @@ function ClanDetails() {
     const clan = useSelector((state) => state.clan.clan)
     const status = useSelector((state) => state.clan.status)
     const error = useSelector((state) => state.clan.error)
+    const navigate = useNavigate()
 
     useEffect(() => {
-        if (status === 'idle') {
             dispatch(fetchClan(id))
-        }
-    }, [status, dispatch, id])
+    }, [dispatch, id])
 
     useEffect(() => {
         return () => {
           dispatch(resetClan())
         }
       }, [dispatch, id])
+    
+    const handleDelete = () => {
+        dispatch(deleteClan(id)).then(() => {
+            navigate('/clans')
+        })
+    }
 
     let content
 
@@ -28,12 +33,13 @@ function ClanDetails() {
         content = <p>Loading...</p>
     } else if (status === 'succeeded') {
         content = (
-            <div>
+            <div className="details-box">
                 <h3>{clan.name}</h3>
                 <p>{clan.description}</p>
+                <button onClick={handleDelete}>Delete Clan</button>
                 <h4>Members:</h4>
                 <ul>
-                    {clan.members.map((member) => (
+                    {clan.members?.map((member) => (
                         <li key={member.id}>
                             {member.username} - {member.role}
                             <ul>
@@ -48,7 +54,7 @@ function ClanDetails() {
                 </ul>
                 <h4>Events:</h4>
                 <ul>
-                    {clan.events.map((event) => (
+                    {clan.events?.map((event) => (
                         <li key={event.id}>
                             {event.event} - {event.date} - {event.location} - {event.details}
                         </li>
@@ -61,7 +67,7 @@ function ClanDetails() {
     }
 
     return (
-        <div>
+        <div className="details-container">
             <h2>Welcome to the Clan Details Page</h2>
             {content}
         </div>

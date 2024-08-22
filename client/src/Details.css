@@ -1,0 +1,58 @@
+/* src/Details.css */
+
+body {
+    background-color: #2b2b2b; 
+    color: #0a0a04; 
+    font-family: 'Press Start 2P', cursive; 
+    background-image: url('https://i.pinimg.com/736x/db/05/11/db05116b60dcb3218b25dcf6ffc9c528.jpg'); 
+    background-repeat: no-repeat;
+}
+
+.details-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.details-box {
+    background-color: #3a3a3a; 
+    border: 2px solid #000000; 
+    background-image: url('https://e7.pngegg.com/pngimages/773/339/png-clipart-roll-paper-paper-parchment-scroll-others-miscellaneous-rectangle-thumbnail.png');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    padding: 10px;
+    width: 400px; 
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    height: 100%; 
+}
+
+h2, h3, h4 {
+    color: #000000; 
+}
+
+ul {
+    list-style-type: none; 
+    padding: 0;
+}
+
+li {
+    margin: 5px 0;
+}
+
+.details-box button {
+    background-color: #4A2C2A; 
+    color: #FFFF00; 
+    border: 2px solid #000000; 
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive; 
+    margin: 10px;
+}
+
+.details-box button:hover {
+    background-color: #6A4C4A; 
+}
